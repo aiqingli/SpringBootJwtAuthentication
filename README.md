@@ -12,3 +12,5 @@ To enforce https over http
 1. Generate a self-signed SSL certificate with the following command, Sonyymm
    keytool -genkeypair -alias my-app-cert -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650 -dname "CN=localhost, OU=IT, O=MyCompany, L=MyCity, S=MyState, C=US"
 2. The keystore.p12 file will be created in the current directory. Move it into the src/main/resources folder of the Spring Boot project
+3. To avoid putting the password in the application.properties file, run the app with 
+   java -jar target/spring-security-jwt-0.0.1-SNAPSHOT.jar --server.ssl.key-store-password=your-password
