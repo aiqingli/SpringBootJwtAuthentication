@@ -1,4 +1,5 @@
 This project demonstrates how to use JWT to protect REST API
+
 To Verify:
 1. Run SpringSecurityJwtApplication
 2. GET  http://localhost:8080/api/v1/welcome  ==> 200 OK
