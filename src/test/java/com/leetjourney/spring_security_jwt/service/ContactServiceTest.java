@@ -28,7 +28,7 @@ public class ContactServiceTest {
         testContact = new Contact();
         testContact.setId(1L);
         testContact.setEmail("test@example.com");
-        testContact.setName("Test User");
+        testContact.setFullName("Test User");
     }
 
     @Test
