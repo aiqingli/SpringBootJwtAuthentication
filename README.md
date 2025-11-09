@@ -1,4 +1,4 @@
-This project demonstrates how to use JWT to protect REST API
+This project demonstrates how to use JWT to protect REST API. JJWT is a Java library for creating and verifying JSON Web Tokens (JWTs) and JSON Web Keys (JWKs).
 
 To Verify:
 1. Run SpringSecurityJwtApplication
