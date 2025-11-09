@@ -33,7 +33,7 @@ public class MainController {
         return "User Content with JWT";
     }
 
-    @PostMapping("/contact")
+    @PostMapping("/contactus")
     public String saveContact(@RequestBody Contact contact) {  
         return contactService.saveContact(contact);      
        // return "Thank you for contacting us!";       
@@ -41,7 +41,7 @@ public class MainController {
 
     @PostMapping("/getContact")
     public String getContact(@RequestBody Contact contact) {  
-        contactService.findByEmail(contact.getEmail());      
-        return "Thank you for contacting us!";       
+        contactService.findByEmail(contact.getEmail());  
+        return "Thank you for contacting us! Your contact ID is: " + contact.getId();       
     }
 }

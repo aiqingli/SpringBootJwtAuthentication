@@ -51,7 +51,7 @@ public class WebSecurityConfig {
                                 org.springframework.security.config.http.SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(a ->
-                        a.requestMatchers("/api/v1/auth/**", "/api/v1/welcome", "/api/v1/contact").permitAll()
+                        a.requestMatchers("/api/v1/auth/**", "/api/v1/welcome", "/api/v1/contactus").permitAll()
                                 .anyRequest().authenticated()
                 );
 
