@@ -8,19 +8,19 @@ To Verify:
 5. POST  http://localhost:8080/api/v1/auth/signin with { "username": "user", "password": "pwd"} ==> 200 OK and token
 6. GET  http://localhost:8080/api/v1/user with Authorization token ==> 200 OK
 7. POST  http://localhost:8080/api/v1/contactus with 
-         {"fullName": "First Last",  
+         {"name": "First Last",  
          "email": "username@gmail.com",  
          "phone": "123-456-7890",  
-         "projectSummary": "This is a test message, please ignore!"
+         "message": "This is a test message, please ignore!"
          } 
-         ==> Thankyouforcontactingus!YourcontactIDis: 1
-8. POST  http://localhost:8080/api/v1/getcontact with {"email": "username@gmail.com",} ==> 
+         ==> Thankyouforcontactingus!Wewillgetbacktoyousoon. | Submission Failed: Contact with email aiqing_li@yahoo.com already exists.
+8. POST  http://localhost:8080/api/v1/getcontact with {"email": "username@gmail.com",} ==> empty body with 404 Not Found status
          {
          "id": 1,
-         "fullName": "First Last Name",
+         "name": "First Last Name",
          "email": "username@gmail.com",
          "phone": "123-456-7890",
-         "projectSummary": "This is a test message, please ignore!"
+         "message": "This is a test message, please ignore!"
          } 
          
 
