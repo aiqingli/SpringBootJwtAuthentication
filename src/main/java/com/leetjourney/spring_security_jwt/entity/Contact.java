@@ -16,10 +16,9 @@ import lombok.NoArgsConstructor;
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;   
-     
-    // Changed 'name' to 'fullName' to match the HTML form
-    private String fullName; 
+    private Long id;        
+    
+    private String name; 
 
     @Column(unique = true)
     private String email;    
@@ -27,15 +26,15 @@ public class Contact {
     private String phone;
     
     // Changed 'message' to 'projectSummary' to match the HTML form input name
-    private String projectSummary; 
+    private String message; 
 
     // Custom toString for debugging (Jackson does NOT use this for JSON output)
     @Override
     public String toString() {
         return "Contact(id=" + this.id + 
-               ", fullName=" + this.fullName + 
+               ", name=" + this.name + 
                ", email=" + this.email + 
                ", phone=" + this.phone + 
-               ", projectSummary=" + this.projectSummary + ")";
+               ", message=" + this.message + ")";
     }
 }

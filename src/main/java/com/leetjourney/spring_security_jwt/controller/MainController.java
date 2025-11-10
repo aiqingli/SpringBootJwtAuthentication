@@ -52,7 +52,7 @@ public class MainController {
             return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         } else {
             // Success
-            String message = "Thank you for contacting us! Your contact ID is: " + savedContact.getId();
+            String message = "Thank you for contacting us! We will get back to you soon.";
             // Return 201 Created status with the success message
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         }

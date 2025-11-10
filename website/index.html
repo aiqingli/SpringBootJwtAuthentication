@@ -253,8 +253,8 @@
                 <p style="text-align: center;">Tell us about your challenge. We'll be in touch within 1 business day.</p>
 
                 <label for="name">Your Name</label>
-                <!-- Changed name to 'fullName' to be clearer for a JSON payload -->
-                <input type="text" id="name" name="fullName" required> 
+                <!-- UPDATED: Name attribute now matches the Contact entity field 'name' -->
+                <input type="text" id="name" name="name" required> 
 
                 <label for="email">Work Email</label>
                 <input type="email" id="email" name="email" required>
@@ -262,8 +262,9 @@
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="(XXX) XXX-XXXX">
 
-                <label for="project">Project Summary</label>
-                <textarea id="project" name="projectSummary" rows="5" placeholder="e.g., We need to migrate our legacy Oracle system to AWS and integrate a new AI-powered recommendation engine." required></textarea>
+                <label for="message">Project Summary</label>
+                <!-- UPDATED: Name attribute now matches the Contact entity field 'message' -->
+                <textarea id="message" name="message" rows="5" placeholder="e.g., We need to migrate our legacy Oracle system to AWS and integrate a new AI-powered recommendation engine." required></textarea>
 
                 <button type="submit" class="form-button" id="submitButton">Submit & Start Co-Winning</button>
                 <div id="feedbackMessage"></div>
@@ -282,7 +283,8 @@
             const form = document.getElementById('signupForm');
             const submitButton = document.getElementById('submitButton');
             const feedbackMessage = document.getElementById('feedbackMessage');
-            const apiUrl = 'https://localhost:8443/api/v1/contactus'; // Target URL from user request
+            // Ensure this URL matches your Spring Boot server configuration
+            const apiUrl = 'https://localhost:8443/api/v1/contactus'; 
 
             /**
              * Handles the form submission by preventing default HTML submission,
@@ -305,12 +307,11 @@
                     data[key] = value;
                 });
 
-                // 2. Convert to JSON payload
                 const jsonPayload = JSON.stringify(data);
                 console.log('Sending JSON Payload:', jsonPayload);
 
                 try {
-                    // 3. Send data using fetch API
+                    // 2. Send data using fetch API
                     const response = await fetch(apiUrl, {
                         method: 'POST',
                         headers: {
@@ -319,18 +320,19 @@
                         body: jsonPayload,
                     });
 
-                    // 4. Handle response status
+                    // 3. Handle response status and read the response body as plain text
+                    const responseMessage = await response.text(); 
+                    
                     if (response.ok) {
-                        // Successful submission (200-299 status codes)
-                        feedbackMessage.textContent = 'Success! Your request has been sent. We will contact you soon.';
+                        // Successful submission (201 Created or 200 OK)
+                        feedbackMessage.textContent = responseMessage; // Display the success message string
                         feedbackMessage.className = 'success';
                         form.reset(); // Clear the form fields
                     } else {
                         // API returned an error (4xx or 5xx status codes)
-                        const errorData = await response.text(); // Get response body for error details
-                        feedbackMessage.textContent = `Submission Failed! Status: ${response.status}. Message: ${errorData || 'Server Error'}`;
+                        feedbackMessage.textContent = `Submission Failed: ${responseMessage || 'Server Error'}`;
                         feedbackMessage.className = 'error';
-                        console.error('API Error:', response.status, errorData);
+                        console.error('API Error:', response.status, responseMessage);
                     }
                 } catch (error) {
                     // Handle network errors (e.g., server is offline or CORS issue)
