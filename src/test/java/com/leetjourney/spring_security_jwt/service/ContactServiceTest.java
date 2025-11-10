@@ -55,8 +55,8 @@ public class ContactServiceTest {
     void testSaveContact_Success() {
         when(contactRepository.save(testContact)).thenReturn(testContact);
 
-        String result = contactService.saveContact(testContact);
+        Contact contact = contactService.saveContact(testContact);
 
-        assertEquals("Thank you for contacting us! Your contact ID is: 1", result);
+        assertEquals(testContact, contact);
     }
 }

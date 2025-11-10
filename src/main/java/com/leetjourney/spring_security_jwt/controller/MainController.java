@@ -3,6 +3,7 @@ package com.leetjourney.spring_security_jwt.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,9 +35,27 @@ public class MainController {
         return "User Content with JWT";
     }
 
+   /**
+     * Saves a new contact submission, returning a String message and appropriate HTTP status.
+     * Returns 201 Created on success, or 400 Bad Request if the email is a duplicate.
+     */
     @PostMapping("/contactus")
-    public String saveContact(@RequestBody Contact contact) {  
-        return contactService.saveContact(contact);   
+    public ResponseEntity<String> saveContact(@RequestBody Contact contact) {  
+        // 1. Attempt to save the contact (returns null if duplicate)
+        Contact savedContact = contactService.saveContact(contact);
+        
+        // 2. Check the result from the service
+        if (savedContact == null) {
+            // Duplicate found (service returned null)
+            String message = "Contact with email " + contact.getEmail() + " already exists.";
+            // Return 400 Bad Request with the desired error message
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        } else {
+            // Success
+            String message = "Thank you for contacting us! Your contact ID is: " + savedContact.getId();
+            // Return 201 Created status with the success message
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
     }
 /**
      * Retrieves a contact by email.

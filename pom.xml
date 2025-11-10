@@ -58,7 +58,7 @@
 			<optional>true</optional>
 		</dependency>
 		
-		<!-- JWT dependencies -->	
+		<!-- JWT dependencies. JJWT is a Java library for creating and verifying JSON Web Tokens (JWTs) and JSON Web Keys (JWKs).-->	
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-api</artifactId>
